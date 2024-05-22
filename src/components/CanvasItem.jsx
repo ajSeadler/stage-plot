@@ -1,36 +1,41 @@
 import React from 'react';
-import { useDrag } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 
-const CanvasItem = ({ id, name, position, moveItem }) => {
+const CanvasItem = ({ id, icon, position, moveItem }) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'canvasItem',
-    item: { id, name, position, type: 'canvasItem' },
-    end: (item, monitor) => {
-      const clientOffset = monitor.getClientOffset();
-      if (clientOffset) {
-        const canvasBoundingRect = monitor.getDropResult().canvasRef.getBoundingClientRect();
-        const x = clientOffset.x - canvasBoundingRect.left;
-        const y = clientOffset.y - canvasBoundingRect.top;
-        moveItem(item.id, { x, y });
-      }
-    },
+    item: { id, type: 'canvasItem' },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
   });
 
+  const [, drop] = useDrop({
+    accept: 'canvasItem',
+    hover: (item, monitor) => {
+      if (item.id !== id) return;
+      const clientOffset = monitor.getClientOffset();
+      const canvasBoundingRect = document.getElementById('canvas').getBoundingClientRect();
+      const x = clientOffset.x - canvasBoundingRect.left;
+      const y = clientOffset.y - canvasBoundingRect.top;
+      moveItem(id, { x, y });
+    },
+  });
+
   return (
     <div
-      ref={drag}
+      ref={node => drag(drop(node))}
       className="canvas-item"
       style={{
+        position: 'absolute',
         left: position.x,
         top: position.y,
-        position: 'absolute',
         opacity: isDragging ? 0.5 : 1,
+        cursor: 'move',
       }}
     >
-      {name}
+      <img src={icon.image} alt={icon.name} style={{ width: 32, height: 32 }} />
+      <span>{icon.name}</span>
     </div>
   );
 };

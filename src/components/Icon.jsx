@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
 
-const Icon = ({ name }) => {
+const Icon = ({ name, image }) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'icon',
-    item: { name, type: 'icon' },
+    item: { name, image, type: 'icon' },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -14,9 +14,13 @@ const Icon = ({ name }) => {
     <div
       ref={drag}
       className="icon"
-      style={{ opacity: isDragging ? 0.5 : 1 }}
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        cursor: 'move',
+      }}
     >
-      {name}
+      <img src={image} alt={name} style={{ width: 32, height: 32 }} />
+      <span>{name}</span>
     </div>
   );
 };

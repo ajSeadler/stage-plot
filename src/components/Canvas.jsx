@@ -16,26 +16,22 @@ const Canvas = forwardRef((props, ref) => {
 
       if (item.type === 'icon') {
         addItem(item, { x, y });
-      } else if (item.type === 'canvasItem') {
+      } else {
         moveItem(item.id, { x, y });
       }
-
-      return { canvasRef: canvasRef.current };
     },
   });
 
-  const addItem = (item, position) => {
+  const addItem = (icon, position) => {
     setItems(prevItems => [
       ...prevItems,
-      { ...item, id: `${item.name}-${Date.now()}`, position },
+      { id: prevItems.length + 1, icon, position },
     ]);
   };
 
   const moveItem = (id, position) => {
     setItems(prevItems =>
-      prevItems.map(item =>
-        item.id === id ? { ...item, position } : item
-      )
+      prevItems.map(item => (item.id === id ? { ...item, position } : item))
     );
   };
 
@@ -44,18 +40,17 @@ const Canvas = forwardRef((props, ref) => {
   }));
 
   return (
-    <div className="canvas-container">
-      <div ref={node => { drop(node); canvasRef.current = node; }} className="canvas">
-        {items.map((item, index) => (
-          <CanvasItem
-            key={index}
-            id={item.id}
-            name={item.name}
-            position={item.position}
-            moveItem={moveItem}
-          />
-        ))}
-      </div>
+    <div ref={canvasRef} className="canvas" style={{ position: 'relative', width: '100%', height: '100%' }}>
+      {items.map((item, index) => (
+        <CanvasItem
+          key={index}
+          id={item.id}
+          icon={item.icon}
+          position={item.position}
+          moveItem={moveItem}
+        />
+      ))}
+      <div ref={drop} style={{ width: '100%', height: '100%' }}></div>
     </div>
   );
 });
