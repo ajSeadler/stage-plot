@@ -9,53 +9,82 @@ body {
 
 .app {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
 }
 
 .sidebar {
-  width: 100%;
-  background: #f4f4f4;
+  width: 200px;
+  background-color: #f4f4f4;
   padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  border-right: 1px solid #ddd;
+  height: 100%; /* Make the sidebar take up the full viewport height */
+  overflow-y: auto; /* Allow scrolling if the content overflows */
+  position: sticky; /* Make the sidebar sticky */
+  top: 0; /* Ensure the sticky position starts from the top */
 }
 
-.icon {
-  padding: 10px;
-  margin: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: grab;
+.heading {
+  text-decoration: underline;
 }
 
 .canvas-container {
-  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  flex: 1;
+  background-color: #e9ecef; /* Optional: Background color for better visibility */
 }
 
 .canvas {
-  width: 100%;
-  max-width: 1200px;
-  height: 100%;
-  max-height: 800px;
   position: relative;
-  background: #fafafa;
-  border: 2px dashed #ddd;
-  overflow: hidden;
+  width: auto; /* Adjust the width as needed */
+  height: 100%; /* Adjust the height as needed */
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: move;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-direction: column;
+}
+
+.icon img {
+  margin-bottom: 5px;
 }
 
 .canvas-item {
-  padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: move;
   position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
+
+.canvas-item img {
+  margin-bottom: 5px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .icon img:not([alt="Drums"]), .canvas-item img:not([alt="Drums"]) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon img:not([alt="Drums"]), .canvas-item img:not([alt="Drums"]) {
+    width: 30px;
+    height: 30px;
+  }
+}
+

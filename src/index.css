@@ -5,6 +5,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: #333;
 }
 
 .app {
@@ -32,11 +33,10 @@ body {
 
 .canvas {
   position: relative;
-  width: 800px; /* Adjust the width as needed */
-  height: 600px; /* Adjust the height as needed */
+  width: auto; /* Adjust the width as needed */
+  height: 100vh; /* Adjust the height as needed */
   background-color: #fff;
   border: 1px solid #ddd;
-  margin: 10px;
 }
 
 .icon {
@@ -48,6 +48,7 @@ body {
 
 .icon img {
   margin-right: 10px;
+  height: auto !important;
 }
 
 .canvas-item {
@@ -58,4 +59,5 @@ body {
 
 .canvas-item img {
   margin-right: 10px;
+  height: auto !important;
 }

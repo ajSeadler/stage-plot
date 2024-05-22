@@ -10,16 +10,16 @@ const Icon = ({ name, image }) => {
     }),
   });
 
+  const iconStyle = {
+    width: name === 'Drums' ? '70px' : '50px',
+    height: name === 'Drums' ? '70px' : '50px',
+    opacity: isDragging ? 0.5 : 1,
+    cursor: 'move',
+  };
+
   return (
-    <div
-      ref={drag}
-      className="icon"
-      style={{
-        opacity: isDragging ? 0.5 : 1,
-        cursor: 'move',
-      }}
-    >
-      <img src={image} alt={name} style={{ width: 32, height: 32 }} />
+    <div ref={drag} className="icon" style={{ cursor: 'move' }}>
+      <img src={image} alt={name} style={iconStyle} />
       <span>{name}</span>
     </div>
   );

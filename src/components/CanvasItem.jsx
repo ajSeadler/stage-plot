@@ -22,19 +22,21 @@ const CanvasItem = ({ id, icon, position, moveItem }) => {
     },
   });
 
+  const itemStyle = {
+    left: position.x,
+    top: position.y,
+    opacity: isDragging ? 0.5 : 1,
+    cursor: 'move',
+  };
+
+  const imgStyle = {
+    width: icon.name === 'Drums' ? '90px' : '70px',
+    height: icon.name === 'Drums' ? '90px' : '70px',
+  };
+
   return (
-    <div
-      ref={node => drag(drop(node))}
-      className="canvas-item"
-      style={{
-        position: 'absolute',
-        left: position.x,
-        top: position.y,
-        opacity: isDragging ? 0.5 : 1,
-        cursor: 'move',
-      }}
-    >
-      <img src={icon.image} alt={icon.name} style={{ width: 32, height: 32 }} />
+    <div ref={node => drag(drop(node))} className="canvas-item" style={itemStyle}>
+      <img src={icon.image} alt={icon.name} style={imgStyle} />
       <span>{icon.name}</span>
     </div>
   );

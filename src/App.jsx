@@ -5,10 +5,13 @@ import './App.css';
 
 const App = () => {
   return (
+    <>
+    {/* <h1>STAGE PLOT DESIGNER</h1> */}
     <div className="app">
       <Sidebar />
       <Canvas />
     </div>
+    </>
   );
 };
 
