@@ -11,11 +11,16 @@ const Icon = ({ name, image }) => {
   });
 
   const iconStyle = {
-    width: name === 'Drums' ? '70px' : '50px',
-    height: name === 'Drums' ? '70px' : '50px',
+    width: '50px', // Default width for icons
+    height: '50px', // Default height for icons
     opacity: isDragging ? 0.5 : 1,
     cursor: 'move',
   };
+
+  if (name === "Drums") {
+    iconStyle.width = '70px'; // Set width to 70px for drums
+    iconStyle.height = '70px'; // Set height to 70px for drums
+  }
 
   return (
     <div ref={drag} className="icon" style={{ cursor: 'move' }}>

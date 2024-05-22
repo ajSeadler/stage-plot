@@ -30,9 +30,14 @@ const CanvasItem = ({ id, icon, position, moveItem }) => {
   };
 
   const imgStyle = {
-    width: icon.name === 'Drums' ? '90px' : '70px',
-    height: icon.name === 'Drums' ? '90px' : '70px',
+    width: '50px', // Default width for icons
+    height: '50px', // Default height for icons
   };
+
+  if (icon.name === 'Drums') {
+    imgStyle.width = '170px'; // Set width to 170px for drums
+    imgStyle.height = '170px'; // Set height to 170px for drums
+  }
 
   return (
     <div ref={node => drag(drop(node))} className="canvas-item" style={itemStyle}>
